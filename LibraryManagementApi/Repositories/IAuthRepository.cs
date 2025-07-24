@@ -1,4 +1,5 @@
 ﻿using LibraryManagementApi.DTOs.Authentication;
+using LibraryManagementApi.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryManagementApi.Repositories
@@ -6,6 +7,6 @@ namespace LibraryManagementApi.Repositories
     public interface IAuthRepository
     {
         Task<string?> LoginAsync(LoginDto loginDto);
-        Task<IActionResult> RegisterAsync(RegisterDto registerDto);
+        Task<User> RegisterAsync(RegisterDto registerDto);
     }
 }

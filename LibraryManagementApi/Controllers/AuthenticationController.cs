@@ -30,11 +30,18 @@ namespace LibraryManagementApi.Controllers
             return Ok(result);
         }
 
-        //[HttpGet]
-        //[Route("register")]
-        //public Task<IActionResult> register(LoginDto loginDto)
-        //{
+        [HttpPost]
+        [Route("register")]
+        public async Task<IActionResult> register(RegisterDto registerDto)
+        {
+            var result = await _authRepository.RegisterAsync(registerDto);
 
-        //}
+            if (result == null)
+            {
+                return NotFound("Email is already exists.");
+            }
+
+            return Ok(result);
+        }
     }
 }

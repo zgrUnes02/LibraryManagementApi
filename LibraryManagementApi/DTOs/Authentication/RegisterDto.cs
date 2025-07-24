@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace LibraryManagementApi.DTOs.Authentication
 {
@@ -15,5 +16,8 @@ namespace LibraryManagementApi.DTOs.Authentication
 
         [Required(ErrorMessage = "Password is required.")]
         public string Password { get; set; } = string.Empty;
+
+        [DefaultValue("Admin")]
+        public string Role { get; set; }
     }
 }
