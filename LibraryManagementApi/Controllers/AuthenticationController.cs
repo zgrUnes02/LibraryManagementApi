@@ -43,5 +43,15 @@ namespace LibraryManagementApi.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet]
+        [Route("GetException")]
+        public async Task<IActionResult> GetAll()
+        {
+            //List<int> integers = new List<int> { 1, 2, 3 };
+            //return Ok(integers);
+
+            throw new Exception("Error !");
+        }
     }
 }

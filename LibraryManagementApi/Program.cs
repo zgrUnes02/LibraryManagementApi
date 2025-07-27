@@ -1,4 +1,5 @@
 using LibraryManagementApi.Database;
+using LibraryManagementApi.Exceptions;
 using LibraryManagementApi.Repositories;
 using LibraryManagementApi.Services;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 
 builder.Services.AddScoped<IAuthRepository, AuthenticationService>();
+
+// Add global exception handler
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 
 // Add Cors
 builder.Services.AddCors(options =>
@@ -45,6 +50,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseExceptionHandler();
 
 app.UseCors("FrontEndExemple");
 
