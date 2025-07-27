@@ -19,6 +19,18 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<IAuthRepository, AuthenticationService>();
 
+// Add Cors
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("FrontEndExemple", policy =>
+    {
+        policy.WithOrigins("https://localhost:7056/");
+        policy.AllowAnyHeader();
+        policy.AllowAnyMethod();
+        policy.AllowCredentials();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -33,5 +45,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors("FrontEndExemple");
 
 app.Run();
