@@ -11,23 +11,20 @@ namespace LibraryManagementApi.Exceptions
             _logger = logger;
         }
 
-
-        public async ValueTask<bool> TryHandleAsync(
-            HttpContext httpContext, 
-            Exception exception, 
-            CancellationToken cancellationToken)
+        public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
         {
-            _logger.LogError(exception, $"Error {exception.Message} Occurred at {DateTime.Now}");
+            _logger.LogError(exception, $"Error occurred {exception.GetType().Name} At {DateTime.Now}");
 
             ProblemDetails problemDetails = new ProblemDetails
             {
+                Type = exception.GetType().Name,
+                Title = "Exception error",
                 Detail = exception.Message,
-                Title = exception.GetType().Name,
                 Status = StatusCodes.Status400BadRequest,
+                Instance = httpContext.Request.Path
             };
 
-
-            httpContext.Response.StatusCode = problemDetails.Status.Value;
+            httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
             await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
 
             return true;
