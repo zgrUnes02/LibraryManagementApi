@@ -1,6 +1,8 @@
 ﻿using LibraryManagementApi.DTOs.Authentication;
+using LibraryManagementApi.Models;
 using LibraryManagementApi.Repositories;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryManagementApi.Controllers
@@ -51,7 +53,11 @@ namespace LibraryManagementApi.Controllers
             //List<int> integers = new List<int> { 1, 2, 3 };
             //return Ok(integers);
 
-            throw new Exception("Error !");
+            //throw new Exception("Error !");
+
+            return Ok();
+
+
         }
     }
 }

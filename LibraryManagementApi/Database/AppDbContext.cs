@@ -1,4 +1,5 @@
 ﻿using LibraryManagementApi.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace LibraryManagementApi.Database
@@ -39,6 +40,19 @@ namespace LibraryManagementApi.Database
                 .WithMany(a => a.Books)
                 .HasForeignKey(b => b.AuthorId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<User>()
+                .HasData(
+                    new User
+                    {
+                        Id = 1,
+                        FirstName = "admin",
+                        LastName = "admin",
+                        Email = "admin@gmail.com",
+                        Password = "AQAAAAIAAYagAAAAEIDi0PUC5W4yIOsGi1B0JmiR9HlYQ1mYHpoHZj8dqJlkEn8B0d8McW/7IZsA3I6hbw==",
+                        Role = "Admin"
+                    }
+                );
         }
     }
 }
